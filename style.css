@@ -1,0 +1,114 @@
+html
+{
+    height: 100%;
+}
+
+body
+{
+    background-color: #1d1d20;
+    font-family: 'Poppins', sans-serif;
+    height: 100%
+}
+
+
+                          /* Logowanie */
+
+                          
+.container
+{
+    height: calc(100% - 25px);
+    background: #242026;
+    box-shadow: 0 15px 25px rgba(164, 162, 175, 0.7);
+    border-radius: 10px;
+}
+
+h2
+{
+    color: #fff;
+    font-size: 2rem;
+}
+
+form
+{
+    width: 70%;
+}
+
+.container .user-box input
+{
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.container .user-box label 
+{
+    position: relative;
+    left: 0;
+    top: -60px;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.container .user-box input:focus~label,
+.container .user-box input:valid~label 
+{
+    top: -85px;
+    left: 0;
+    color: #8F7CEC;
+    font-size: 0.8rem;
+}
+
+#submit 
+{
+    background-color: #1d1d20;
+    padding: 10px 20px;
+    color: #CBBDDB;
+    font-size: 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 4px;
+    border: 1px solid #8F7CEC;
+    margin: auto;
+}
+
+#submit:hover 
+{
+    background: #8F7CEC;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #8F7CEC, 0 0 25px #8F7CEC, 0 0 50px #8F7CEC, 0 0 70px #8F7CEC;
+}
+
+.button
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+#register 
+{
+    text-align: center;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #CBBDDB;
+    width: 35%;
+    margin-bottom: 18px;
+}
+
+#register a 
+{
+    color: #8F7CEC;
+    text-decoration: none;
+}
