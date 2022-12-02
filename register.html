@@ -23,32 +23,43 @@
         <div class="row justify-content-center">
 
             <div class="col m-3 mb-md-5">
-                <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-5">Logowanie</h2>
+                <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-4">Rejestracja</h2>
             </div>
 
             <div class="col-12 d-flex justify-content-center">
-                <form>
-                    <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
+
+                <form id="registration_form">
+                    <div class="register-box">
                         <input type="text" name="" required="">
                         <label>Nazwa użytkownika</label>
                     </div>
 
-                    <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
+                    <div class="register-box">
+                        <input type="email" name="" required="">
+                        <label>Email</label>
+                    </div>
+
+                    <div class="register-box">
                         <input type="password" name="" required="">
                         <label>Hasło</label>
                     </div>
+
+                    <div class="register-box">
+                        <input type="password" name="" required="">
+                        <label>Powtórz hasło</label>
+                    </div>
                 </form>
+
             </div>
 
             <div class="row justify-content-center align-items-center">
 
                 <div class="col-12 col-md-6 mb-3 button">
-                    <input id="submit" type="submit" value="Zaloguj się">
+                    <input id="submit" type="submit" value="Zarejestruj się">
                 </div>
 
                 <div class="col-12 col-md-6 button" id="register">
-                    Nie posiadasz konta? <br>
-                    <a href="register.html">Zarejestruj się</a>
+                    <a href="index.html">Zaloguj się</a>
                 </div>
             </div>
 

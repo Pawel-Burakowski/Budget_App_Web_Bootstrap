@@ -51,8 +51,8 @@ form
 {
     position: relative;
     left: 0;
-    top: -60px;
-    padding: 10px 0;
+    top: -50px;
+    padding: 0px 0;
     font-size: 1rem;
     color: #fff;
     pointer-events: none;
@@ -111,4 +111,48 @@ form
 {
     color: #8F7CEC;
     text-decoration: none;
+}
+
+
+                          /* Rejestracja */
+
+
+#registration_form
+{
+    width: 70%;
+}
+
+.container .register-box input
+{
+    position: relative;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.container .register-box label
+{
+    position: relative;
+    left: 0;
+    top: -50px;
+    padding: 0px 0;
+    font-size: 1rem;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.container .register-box input:focus~label,
+.container .register-box input:valid~label 
+{
+    top: -85px;
+    left: 0;
+    color: #8F7CEC;
+    font-size: 0.8rem;
 }
