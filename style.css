@@ -156,3 +156,33 @@ form
     color: #8F7CEC;
     font-size: 0.8rem;
 }
+
+
+                          /* MENU Główne */
+
+
+.opcion
+{
+    margin: 40px;
+	height: 40px;
+    border-bottom: 1px solid #fff;
+	text-align: center;
+}
+
+.opcionlogout
+{
+	text-align: center;
+    font-size: 0.8rem;
+}
+
+a.opcionlink
+{
+    color: #fff;
+	text-decoration: none;
+}
+
+.opcionlogout a
+{
+    color: #8F7CEC;
+    text-decoration: none;
+}
