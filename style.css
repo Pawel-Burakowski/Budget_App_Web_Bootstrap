@@ -186,3 +186,23 @@ a.opcionlink
     color: #8F7CEC;
     text-decoration: none;
 }
+
+
+                          /* Dodaj przychód */
+
+
+.field
+{
+    width: 70%;
+}
+
+#right
+{
+    width: 38px;
+}
+
+.input-group-text
+{
+    width: 110px;
+    color: #8F7CEC;
+}
