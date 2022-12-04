@@ -10,11 +10,32 @@ body
     height: 100%
 }
 
+::-webkit-scrollbar
+{
+    width: 6px;
+}
+    ::-webkit-scrollbar-track
+{
+    border-left: 1px solid #000;
+}
+    ::-webkit-scrollbar-thumb
+{
+    background: #8F7CEC;
+}
+    ::-webkit-scrollbar-thumb:hover 
+{
+    background: #8F7CEC;
+}
+    ::-webkit-scrollbar-thumb:window-inactive 
+{
+    background: #8F7CEC;
+} 
+
 
                           /* Logowanie */
 
                           
-.container
+#scr
 {
     height: calc(100% - 25px);
     background: #242026;
@@ -215,4 +236,24 @@ a.opcionlink
 {
     width: 165px;
     color: #8F7CEC;
+}
+
+
+                          /* Bilans */
+
+
+#okres
+{
+    width: 73px;
+    color: #8F7CEC;
+}
+
+#tabela
+{
+    color: #8F7CEC;
+}
+
+.table-dark
+{
+    font-size: 0.8rem;
 }
