@@ -228,6 +228,11 @@ a.opcionlink
     color: #8F7CEC;
 }
 
+textarea 
+{
+    resize: none;
+}
+
 
                           /* Dodaj wydatek */
 
