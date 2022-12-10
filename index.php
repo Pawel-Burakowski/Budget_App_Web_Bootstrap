@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if ((isset($_SESSION['isLogin'])) && ($_SESSION['isLogin']==true))
+{
+    header('Location: mainMenu.php');
+    exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -26,18 +39,18 @@
                 <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-5">Logowanie</h2>
             </div>
 
-            <div class="col-12 d-flex justify-content-center">
-                <form>
+            <div class="col-12 d-flex justify-content-center" id="formularz">
+                <form action="login.php" method="post">
                     <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
-                        <input type="text" name="" required="">
-                        <label>Nazwa użytkownika</label>
+                        <input type="text" name="login" required="" id="login">
+                        <label for="login">Nazwa użytkownika</label>
                     </div>
 
                     <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
-                        <input type="password" name="" required="">
-                        <label>Hasło</label>
+                        <input type="password" name="password" required="" id="password">
+                        <label for="password">Hasło</label>
                     </div>
-                </form>
+                
             </div>
 
             <div class="row justify-content-center align-items-center">
@@ -48,10 +61,19 @@
 
                 <div class="col-12 col-md-6 button" id="register">
                     Nie posiadasz konta? <br>
-                    <a href="register.html">Zarejestruj się</a>
+                    <a href="register.php">Zarejestruj się</a>
                 </div>
             </div>
 
+            <?php
+                if (isset($_SESSION['error']))
+                {
+                    echo '<br />'.$_SESSION['error'];
+                    unset($_SESSION['error']);
+                }
+            ?>
+
+                </form>            
         </div>
     </div>
 
