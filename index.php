@@ -40,17 +40,18 @@ if ((isset($_SESSION['isLogin'])) && ($_SESSION['isLogin']==true))
             </div>
 
             <div class="col-12 d-flex justify-content-center" id="formularz">
-                <form action="login.php" method="post">
-                    <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
-                        <input type="text" name="login" required="" id="login">
-                        <label for="login">Nazwa użytkownika</label>
-                    </div>
-
-                    <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
-                        <input type="password" name="password" required="" id="password">
-                        <label for="password">Hasło</label>
-                    </div>
-                
+                <div class="form">
+                    <form action="login.php" method="post">
+                        <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
+                            <input type="text" name="login" required="" id="login">
+                            <label for="login">Nazwa użytkownika</label>
+                        </div>
+    
+                        <div class="user-box col m-3 mb-md-3 pt-2 pt-md-3">
+                            <input type="password" name="password" required="" id="password">
+                            <label for="password">Hasło</label>
+                        </div>
+                </div>
             </div>
 
             <div class="row justify-content-center align-items-center">
@@ -72,8 +73,7 @@ if ((isset($_SESSION['isLogin'])) && ($_SESSION['isLogin']==true))
                     unset($_SESSION['error']);
                 }
             ?>
-
-                </form>            
+                    </form>
         </div>
     </div>
 

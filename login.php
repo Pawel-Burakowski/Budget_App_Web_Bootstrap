@@ -46,14 +46,14 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 
                     else
                     {
-                        $_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                        $_SESSION['error'] = '<span style="color:red; text-align: center; font-size: 1rem;">Nieprawidłowy login lub hasło!</span>';
                         header('Location: index.php');
                     }
                 }
 
                 else 
                 {
-                    $_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+                    $_SESSION['error'] = '<span style="color:red; text-align: center; font-size: 1rem;">Nieprawidłowy login lub hasło!</span>';
                     header('Location: index.php');
                 }
             }
@@ -70,7 +70,7 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
         
 	catch(Exception $e)
 		{
-			echo '<span style="color:red;">Błąd serwera! Spróbuj ponownie później!</span>';
+			echo '<span style="color:red; font-size: 1rem;">Błąd serwera! Spróbuj ponownie później!</span>';
 			echo '<br />Informacja developerska: error 404 :( '.$e;
 		}
 
