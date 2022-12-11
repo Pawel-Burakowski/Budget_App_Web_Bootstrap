@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
+{
+    header('Location: index.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -25,6 +36,12 @@
             <div class="col m-3 mb-md-5">
                 <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-4">Menu główne</h2>
             </div>
+                <?php
+                    if (isset($_SESSION['positionAdded'])){
+                        echo '<div class="col text-center fs-5 mt-3">'.$_SESSION['positionAdded'].'</div>';
+				        unset($_SESSION['positionAdded']);
+                    }
+                ?>
 
             <div class="col-12 d-flex justify-content-center">
 
@@ -50,7 +67,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-12 opcionlogout">
-                    <a href="index.html" class="d-flex justify-content-center p-3 mt-3 opcionlink">Wyloguj</a>
+                    <a href="logout.php" class="d-flex justify-content-center p-3 mt-3 opcionlink">Wyloguj</a>
                 </div>
             </div>
 

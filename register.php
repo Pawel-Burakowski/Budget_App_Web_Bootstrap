@@ -1,3 +1,8 @@
+<?php
+	session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -26,29 +31,50 @@
                 <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-4">Rejestracja</h2>
             </div>
 
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center" id="formularz">
 
-                <form id="registration_form">
-                    <div class="register-box">
-                        <input type="text" name="" required="">
-                        <label>Nazwa użytkownika</label>
-                    </div>
+                <div class="form">
+                    <form action="regist.php" method="post" id="">
+                        <div class="register-box">
+                            <input type="text" name="login" required="" id="login">
+                            <label for="login">Nazwa użytkownika</label>
+                        </div>
 
-                    <div class="register-box">
-                        <input type="email" name="" required="">
-                        <label>Email</label>
-                    </div>
-
-                    <div class="register-box">
-                        <input type="password" name="" required="">
-                        <label>Hasło</label>
-                    </div>
-
-                    <div class="register-box">
-                        <input type="password" name="" required="">
-                        <label>Powtórz hasło</label>
-                    </div>
-                </form>
+                        <?php
+                        if (isset($_SESSION['e_login']))
+                        {
+                            echo '<div style="color:red">'.$_SESSION['e_login'].'</div>';
+				            unset($_SESSION['e_login']);
+                        }
+                        ?>
+    
+                        <div class="register-box">
+                            <input type="email" name="email" required="" id="email">
+                            <label for="email">Email</label>
+                        </div>
+                        <?php
+                        if (isset($_SESSION['e_email'])){
+                            echo '<div style="color:red">'.$_SESSION['e_email'].'</div>';
+				            unset($_SESSION['e_email']);
+                        }
+                        ?>
+    
+                        <div class="register-box">
+                            <input type="password" name="password" required="">
+                            <label for="password">Hasło</label>
+                        </div>
+                        <?php
+                        if (isset($_SESSION['e_pass'])){
+                            echo '<div style="color:red">'.$_SESSION['e_pass'].'</div>';
+				            unset($_SESSION['e_pass']);
+                        }
+                        ?>
+    
+                        <div class="register-box">
+                            <input type="password" name="" required="">
+                            <label>Powtórz hasło</label>
+                        </div>
+                </div>
 
             </div>
 
@@ -57,9 +83,9 @@
                 <div class="col-12 col-md-6 mb-3 button">
                     <input id="submit" type="submit" value="Zarejestruj się">
                 </div>
-
+                    </form>
                 <div class="col-12 col-md-6 button" id="register">
-                    <a href="index.html">Zaloguj się</a>
+                    <a href="index.php">Zaloguj się</a>
                 </div>
             </div>
 
