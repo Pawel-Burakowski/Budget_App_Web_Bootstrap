@@ -13,6 +13,7 @@ session_start();
         $isRegistrationCorrect = true;
         $login = $_POST['login'];
         $password = $_POST['password'];
+        $password2 = $_POST['password2'];
         $email = $_POST['email'];
         $emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
 
@@ -41,6 +42,13 @@ session_start();
 		{
 			$isRegistrationCorrect = false;
 			$_SESSION['e_pass'] = "Hasło musi posiadać od 6 do 20 znaków";
+            header('Location: register.php');
+		}
+
+        if ($password!=$password2)
+		{
+			$isRegistrationCorrect = false;
+			$_SESSION['e_pass'] = "Podane hasła nie są identyczne!";
             header('Location: register.php');
 		}
 

@@ -39,11 +39,10 @@
                             <input type="text" name="login" required="" id="login">
                             <label for="login">Nazwa użytkownika</label>
                         </div>
-
                         <?php
                         if (isset($_SESSION['e_login']))
                         {
-                            echo '<div style="color:red">'.$_SESSION['e_login'].'</div>';
+                            echo '<div style="color:red; margin-top: -30px; font-size: 1rem;">'.$_SESSION['e_login'].'</div>';
 				            unset($_SESSION['e_login']);
                         }
                         ?>
@@ -54,7 +53,7 @@
                         </div>
                         <?php
                         if (isset($_SESSION['e_email'])){
-                            echo '<div style="color:red">'.$_SESSION['e_email'].'</div>';
+                            echo '<div style="color:red; margin-top: -30px; font-size: 1rem;">'.$_SESSION['e_email'].'</div>';
 				            unset($_SESSION['e_email']);
                         }
                         ?>
@@ -65,15 +64,21 @@
                         </div>
                         <?php
                         if (isset($_SESSION['e_pass'])){
-                            echo '<div style="color:red">'.$_SESSION['e_pass'].'</div>';
+                            echo '<div style="color:red; margin-top: -10px; font-size: 1rem;">'.$_SESSION['e_pass'].'</div>';
 				            unset($_SESSION['e_pass']);
                         }
                         ?>
     
                         <div class="register-box">
-                            <input type="password" name="" required="">
+                            <input type="password" name="password2" required="">
                             <label>Powtórz hasło</label>
                         </div>
+                        <?php
+                        if (isset($_SESSION['e_pass'])){
+                            echo '<div style="color:red; margin-top: -10px; font-size: 1rem;">'.$_SESSION['e_pass'].'</div>';
+				            unset($_SESSION['e_pass']);
+                        }
+                        ?>
                 </div>
 
             </div>

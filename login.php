@@ -46,7 +46,7 @@ if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 
                     else
                     {
-                        $_SESSION['error'] = '<span style="color:red; text-align: center; font-size: 1rem;">Nieprawidłowy login lub hasło!</span>';
+                        $_SESSION['error'] = '<span style="color:red; text-align: center; margin-top: 30px; font-size: 1rem;">Nieprawidłowy login lub hasło!</span>';
                         header('Location: index.php');
                     }
                 }
