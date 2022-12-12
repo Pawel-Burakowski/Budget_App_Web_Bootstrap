@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 session_start();
 
 if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
@@ -8,6 +9,7 @@ if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -36,32 +38,35 @@ if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
             <div class="col m-3 mb-md-5">
                 <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-4">Menu główne</h2>
             </div>
+
                 <?php
                     if (isset($_SESSION['positionAdded'])){
-                        echo '<div class="col text-center fs-5 mt-3">'.$_SESSION['positionAdded'].'</div>';
+                        echo '<div class="col-12 d-flex justify-content-center">'.$_SESSION['positionAdded'].'</div>';
 				        unset($_SESSION['positionAdded']);
                     }
                 ?>
 
             <div class="col-12 d-flex justify-content-center">
 
-                <form>
-                    <div class="opcion">
-                        <a href="addIncomes.html" class="opcionlink">Dodaj przychód</a>
-                    </div>
-
-                    <div class="opcion">
-                        <a href="addExpenses.html" class="opcionlink">Dodaj wydatek</a>
-                    </div>
-
-                    <div class="opcion">
-                        <a href="balance.html" class="opcionlink">Przeglądaj bilans</a>
-                    </div>
-
-                    <div class="opcion">
-                        <a href="#" class="opcionlink">Ustawienia</a>
-                    </div>
-                </form>
+                <div class="form">
+                    <form>
+                        <div class="opcion">
+                            <a href="addIncomes.php" class="opcionlink">Dodaj przychód</a>
+                        </div>
+    
+                        <div class="opcion">
+                            <a href="addExpenses.php" class="opcionlink">Dodaj wydatek</a>
+                        </div>
+    
+                        <div class="opcion">
+                            <a href="balance.php" class="opcionlink">Przeglądaj bilans</a>
+                        </div>
+    
+                        <div class="opcion">
+                            <a href="#" class="opcionlink">Ustawienia</a>
+                        </div>
+                    </form>
+                </div>
 
             </div>
 
