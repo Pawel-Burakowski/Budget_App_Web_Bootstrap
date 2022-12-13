@@ -39,13 +39,6 @@ if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
                 <h2 class="d-flex justify-content-center p-3 p-md-4 p-lg-4">Menu główne</h2>
             </div>
 
-                <?php
-                    if (isset($_SESSION['positionAdded'])){
-                        echo '<div class="col-12 d-flex justify-content-center">'.$_SESSION['positionAdded'].'</div>';
-				        unset($_SESSION['positionAdded']);
-                    }
-                ?>
-
             <div class="col-12 d-flex justify-content-center">
 
                 <div class="form">
@@ -81,7 +74,7 @@ if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
+    </script>
 
 </body>
 
