@@ -89,7 +89,7 @@ if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
                                 <input id="submit" type="submit" value="Dodaj przychód">
                             </div>
                             <div class="col-12 col-md-6 button" id="register">
-                                <a href="mainMenu.html">Anuluj</a>
+                                <a href="mainMenu.php">Anuluj</a>
                             </div>
                         </div>
 

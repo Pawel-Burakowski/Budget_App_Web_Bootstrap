@@ -1,3 +1,59 @@
+<?php
+
+session_start();
+
+    if ((!isset($_SESSION['isLogin'])) || ($_SESSION['isLogin']==false))
+    {
+    header('Location: index.php');
+    exit();
+    }
+
+    $userId = $_SESSION['userId'];
+    $data = date("Y-m-d, H:i", mktime (0,0,0,10,15,1985));
+    $year = date('Y');
+    $month = date('m');
+    $currentMonthDaysNumber = date('t', strtotime("MONTH"));
+    $previousMonthDaysNumber = date('t', strtotime("-1 MONTH"));
+
+    if(isset($_POST['dataChoice']))
+    {
+        $dateChoice = $_POST['dataChoice'];
+
+        if($dateChoice == "Bieżący miesiąc")
+        {
+            $endDate = date("Y-m-d", mktime (0,0,0,$month,$currentMonthDaysNumber,$year));
+            $startDate = date("Y-m-d", mktime (0,0,0,$month,'01',$year));
+        }
+        else if($dateChoice == "Poprzedni miesiąc")
+        {
+        $endDate = date("Y-m-d", mktime (0,0,0,($month-1),$previousMonthDaysNumber,$year));
+        $startDate = date("Y-m-d", mktime (0,0,0,($month-1),'01',$year));  
+        }
+        else if ($dateChoice == "Bieżący rok")
+        {
+        $endDate = date("Y-m-d", mktime (0,0,0,'12','31',$year));
+        $startDate = date("Y-m-d", mktime (0,0,0,'01','01',$year));
+        }          
+    }
+
+    else if(isset($_POST['startDate']) && isset($_POST['endDate']))
+    {
+        $startDate= $_POST['startDate'];
+        $endDate = $_POST['endDate'];
+        if ($startDate > $endDate)
+        {
+            $dataError = false;
+        }
+    }
+
+    else if (!isset($_POST['dataChoice']))
+    {
+        $endDate = date("Y-m-d", mktime (0,0,0,$month,$currentMonthDaysNumber,$year));
+        $startDate = date("Y-m-d", mktime (0,0,0,$month,'01',$year));
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -26,166 +82,459 @@
                 <h2 class="d-flex justify-content-center p-3 p-md-4">Bilans</h2>
             </div>
 
-            <div class="row justify-content-center align-items-start">
-
-                <div class="col-12 col-md-6 gx-5 mt-0">
-
-                    <table class="table table-dark">
-                        <thead id="tabela">
-                            <tr>
-                                <th>#</th>
-                                <th>Wydatek</th>
-                                <th>Kwota</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>Jedzenie</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Mieszkanie</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Transport</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Telekomunikacja</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Opieka zdrowotna</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Ubranie</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Higiena</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Dzieci</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Rozrywka</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Wycieczka</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>Szkolenia</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Książki</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>Oszczędności</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>Na złotą jesień, czyli emeryturę </td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>Spłata długów</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>Darowizna</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>Inne wydatki</td>
-                            <td>0,00</td>
-                        </tr>
-                    </table>
-
-                </div>
-
-                <div class="col-12 col-md-6 gx-5 mt-0">
-                    <div class="input-group mt-0 mb-2">
-                        <span class="input-group-text" id="okres">Okres</span>
-                        <select name="Okres" aria-label="Okres" id="" class="form-select">
-                            <option selected>Wybierz...</option>
-                            <option value="1">Bieżący miesiąc</option>
-                            <option value="2">Poprzedni miesiąc</option>
-                            <option value="3">Bieżący rok</option>
-                            <option value="4">Niestandardowy</option>
-                        </select>
+                <div class="navbar d-flex justify-content-center p-0 p-md-0">
+                    <div class="nav-item dropdown">                
+                        <div class="nav-link dropdown-toggle text-light fs-5" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Wybierz zakres dat</div>
+                            <form method="post" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <input class="dropdown-item" type="submit" name="dataChoice" value="Bieżący miesiąc"></input>
+                                <input class="dropdown-item" type="submit" name="dataChoice" value="Poprzedni miesiąc"></input>
+                                <input class="dropdown-item" type="submit" name="dataChoice" value="Bieżący rok"></input>
+                                <input class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" value="Niestandardowy"></input>
+                            </form>
                     </div>
+            
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                        <h5 class="modal-title display-6 fs-4" id="exampleModalLabel">Podaj datę początkową i końcową:</h5>
+                                </div>
 
-                    <table class="table table-dark">
-                        <thead id="tabela">
-                            <tr>
-                                <th>#</th>
-                                <th>Przychód</th>
-                                <th>Kwota</th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>Wynagrodzenie</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Odsetki bankowe	</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Sprzedaż allegro</td>
-                            <td>0,00</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Inne</td>
-                            <td>0,00</td>
-                        </tr>
-                    </table>
+                                <form method="post" class="modal-body">
+                                    <div>
+                                        <label class="form-label" for="start-date">Podaj datę początkową:</label>
+                                        <input class="form-control" type="date" id="start-date" name="startDate">
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <label class="form-label" for="end-date">Podaj datę końcową:</label>
+                                        <input class="form-control" type="date" id="end-date" name="endDate">
+                                    </div> 
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Anuluj</button>
+                                        <button class="btn btn-outline-dark">Zapisz</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            
+                <section>
+                <div class="container">
+                <div class="row">
 
-            </div>
+                <?php
+                
+                function changeNameIncome($categoryName)
+                {
+                    switch($categoryName)
+                    {
+                        case "Salary": $categoryName = "Wypłata";
+                        break;
+                        case "Interest": $categoryName = "Odsetki";
+                        break;
+                        case "Allegro": $categoryName = "Allegro";
+                        break;
+                        case "Another": $categoryName = "Inne";
+                        break;
+                    }                  
+                    return $categoryName;
+                }
+                
+                require_once "connect.php";
+                    mysqli_report(MYSQLI_REPORT_STRICT);
+                
+                if (isset($dataError) && !$dataError)
+                {
+                    echo '<div class="container">';
+                        echo '<div class="row">';
+                            echo '<div class="text-light mt-4 mb-4">';
+                                echo '<h2 class="display-6">Data początkowa musi być wcześniejsza od daty końcowej. Podaj dane ponownie.</h2>';
+                            echo '</div>';  
+                        echo '</div>'; 
+                    echo '</div>'; 
+                    unset($dataError);   
+                } 
+
+                else 
+                {
+                
+                try 
+                {
+                    $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                    
+                    if ($connection->connect_errno!=0)
+                    {
+                        throw new Exception(mysqli_connect_errno());
+                        header('Location: balance.php');
+                    } 
+
+                    else
+                    {
+                        $incomesSqlChart = ("SELECT ind.name, SUM(inc.amount) AS sum FROM incomes inc, incomes_category_assigned_to_users ind WHERE inc.user_id='$userId' AND inc.date_of_income>='$startDate' AND inc.date_of_income<='$endDate' AND inc.user_id=ind.user_id AND inc.income_category_assigned_to_user_id = ind.id GROUP BY ind.id");
+                        $incomesSql = ("SELECT ind.name, inc.amount, inc.date_of_income, inc.income_comment FROM incomes inc, incomes_category_assigned_to_users ind WHERE inc.user_id='$userId' AND inc.date_of_income>='$startDate' AND inc.date_of_income<='$endDate' AND inc.user_id=ind.user_id AND inc.income_category_assigned_to_user_id = ind.id");
+                    
+                        $resultIncomes = $connection->query($incomesSql);
+                        $resultIncomesChart = $connection->query($incomesSqlChart);
+                        
+                        $rowNumberIncomes = $resultIncomes->num_rows;       
+                
+                        if($rowNumberIncomes > 0)
+                        {
+                            $incomesSum = 0;
+                                        echo '<div class="text-light mt-2 mb-2">';
+                                        echo '<h4 class="row justify-content-center" >Bilans od '.$startDate.' do '.$endDate.'</h4>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6 bg-transparent mb-3">';
+                                            echo '<h2 class="row justify-content-center" style="color: #8F7CEC;">Bilans przychodów</h2>';
+                                            echo '<table class="table table-dark">';
+                                                echo '<thead>';
+                                                    echo '<tr>';
+                                                        echo '<th scope="col">Kategoria</th>';
+                                                        echo '<th scope="col">Suma [zł]</th>';
+                                                        echo '<th scope="col">Data</th>';
+                                                        echo '<th scope="col">Komentarz</th>';
+                                                    echo '</tr>';
+                                                echo '</thead>';
+                                                echo '<tbody>';
+                                                while($row = $resultIncomes->fetch_assoc())
+                                                {
+                                                    $categoryName = $row['name'];
+                                                    $categoryName = changeNameIncome($categoryName);
+                
+                                                    echo '<tr>';
+                                                        echo '<td>'.$categoryName.'</td>';
+                                                        echo '<td>'.$row['amount'].'</td>';
+                                                        echo '<td>'.$row['date_of_income'].'</td>';
+                                                        echo '<td>'.$row['income_comment'].'</td>';
+                                                    echo '</tr>';   
+                                                    $incomesSum += $row['amount'];  
+                                                }
+                
+                                                while($row = $resultIncomesChart->fetch_assoc())
+                                                {
+                                                    $categoryName = $row['name'];
+                                                    $categoryName = changeNameIncome($categoryName);
+                
+                                                    $nameArrayIncomes[] = $categoryName;    
+                                                    $sumArrayIncomes[] = $row['sum'];                               
+                                                }
+                
+                                                echo '</tbody>';
+                                                echo '<tfoot>';
+                                                    echo '<tr>';
+                                                        echo '<td>Suma</td>';
+                                                        echo '<td>'.$incomesSum.'</td>';                                        
+                                                    echo '</tr>';
+                                                echo '</tfoot>';
+                                            echo '</table>';
+                                        echo '</div>';
+                                        echo '<div class="col-md-6 diagram bg-transparent mb-3">';
+                                            echo '<h2 class="row justify-content-center" style="color: #8F7CEC;">Diagram przychodów</h2>';
+                                            echo '<div class="piechart m-3">';
+                                                echo '<canvas id="myChartIn"></canvas>';
+                                        echo '</div>';
+                                    echo '</div>';
+                        }
+
+                        else if ($rowNumberIncomes == 0)
+                        {
+                            echo '<div class="container">';                    
+                                echo '<div class="text-light mt-2 mb-2">';
+                                    echo '<h2 class="display-6">Brak zapisanych przychodów w przedziale czasu od '.$startDate.' do '.$endDate.'</h2>';
+                                echo '</div>';
+                            echo '</div>';
+                        }
+                    }
+                
+                }
+                catch(Exception $e)
+                    {
+                        echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
+                        echo '<br />Informacja developerska: '.$e;
+                    }
+                ?>                        
+            
+            <?php   
+            
+            function changeNameExpense($categoryName){
+                switch($categoryName)
+                {
+                    case "Transport": $categoryName = "Transport";
+                    break;
+                    case "Books": $categoryName = "Książki";
+                    break;
+                    case "Food": $categoryName = "Jedzenie";
+                    break;
+                    case "Apartments": $categoryName = "Mieszkanie";
+                    break;
+                    case "Telecommunication": $categoryName = "Telekomunikacja";
+                    break;
+                    case "Health": $categoryName = "Opieka zdrowotna";
+                    break;
+                    case "Clothes": $categoryName = "Ubrania";
+                    break;
+                    case "Hygiene": $categoryName = "Higiena";
+                    break;
+                    case "Kids": $categoryName = "Dzieci";
+                    break;
+                    case "Recreation": $categoryName = "Rozrywka";
+                    break;
+                    case "Trip": $categoryName = "Wycieczka";
+                    break;
+                    case "Savings": $categoryName = "Oszczedności";
+                    break;
+                    case "For Retirement": $categoryName = "Emerytura";
+                    break;
+                    case "Debt Repayment": $categoryName = "Spłata długów";
+                    break;
+                    case "Gift": $categoryName = "Darowizna";
+                    break;
+                    case "Another": $categoryName = "Inne";
+                    break;
+                }
+                return $categoryName;
+            }
+            
+            function changeNamePayment($categoryPay)
+            {
+                switch($categoryPay)
+                {
+                    case "Cash": $categoryPay = "Gotówka";
+                    break;
+                    case "Debit Card": $categoryPay = "Karta debetowa";
+                    break;
+                    case "Credit Card": $categoryPay = "Karta kredytowa";
+                    break;
+                }
+                return $categoryPay;
+            }
+            
+                try 
+                {
+                    $connection = new mysqli($host, $db_user, $db_password, $db_name);
+                    
+                    if ($connection->connect_errno!=0)
+                    {
+                        throw new Exception(mysqli_connect_errno());
+                        header('Location: balance.php');
+                    } 
+                    else 
+                    {               
+                        $expensesSqlChart = ("SELECT exd.name, SUM(ex.amount) AS sum FROM expenses ex, expenses_category_assigned_to_users exd WHERE ex.user_id='$userId' AND ex.date_of_expense>='$startDate' AND ex.date_of_expense<='$endDate' AND ex.user_id=exd.user_id AND ex.expense_category_assigned_to_user_id = exd.id GROUP BY exd.id");
+                        $expensesSql = ("SELECT exd.name, ex.amount, ex.date_of_expense, pay.name, ex.expense_comment FROM expenses ex, expenses_category_assigned_to_users exd, payment_methods_assigned_to_users pay WHERE ex.user_id='$userId' AND ex.date_of_expense>='$startDate' AND ex.date_of_expense<='$endDate' AND ex.user_id=exd.user_id AND ex.user_id=pay.user_id AND ex.payment_method_assigned_to_user_id = pay.id AND ex.expense_category_assigned_to_user_id = exd.id");
+                    
+                        $resultExpenses = $connection->query($expensesSql);
+                        $resultExpensesChart = $connection->query($expensesSqlChart);
+                    
+                        $rowNumberExpenses = $resultExpenses->num_rows;
+                
+                        if($rowNumberExpenses > 0)
+                        {           
+                            $expensesSum = 0;   
+            
+                                echo '<div class="col-md-6 bg-transparent mb-3">';
+                                    echo '<h2 class="row justify-content-center" style="color: #8F7CEC;">Bilans wydatków</h2>';
+                                    echo '<table class="table table-dark">';
+                                        echo '<thead>';
+                                            echo '<tr>';
+                                                echo '<th scope="col">Kategoria</th>';
+                                                echo '<th scope="col">Suma</th>';
+                                                echo '<th scope="col">Data</th>';
+                                                echo '<th scope="col">Sposób płatności</th>';
+                                                echo '<th scope="col">Komentarz</th>';
+                                            echo '</tr>';
+                                        echo '</thead>';
+                                        echo '<tbody>';
+                                        while($row = $resultExpenses->fetch_array())
+                                        {
+                                            $categoryName = $row['0'];
+                                            $categoryPay = $row['3'];
+                                            $categoryName = changeNameExpense($categoryName);
+                                            $categoryPay = changeNamePayment($categoryPay);
+            
+                                            echo '<tr>';
+                                                echo '<td>'.$categoryName.'</td>';
+                                                echo '<td>'.$row['amount'].'</td>';
+                                                echo '<td>'.$row['date_of_expense'].'</td>';
+                                                echo '<td>'.$categoryPay.'</td>';
+                                                echo '<td>'.$row['expense_comment'].'</td>';
+                                            echo '</tr>';   
+                                            $expensesSum += $row['amount'];
+                                        }
+                                        
+                                        while($row = $resultExpensesChart->fetch_assoc())
+                                            {
+                                                $categoryName = $row['name'];
+                                                $categoryName = changeNameExpense($categoryName);
+                                                
+                                                $nameArrayExpenses[] = $categoryName;    
+                                                $sumArrayExpenses[] = $row['sum'];                                   
+                                            }
+            
+                                        echo '</tbody>';
+                                        echo '<tfoot>';
+                                            echo '<tr>';
+                                                echo '<td>Suma [zł]</td>';
+                                                echo '<td>'.$expensesSum.'</td>';                                    
+                                            echo '</tr>';
+                                        echo '</tfoot>';
+                                    echo '</table>';
+                                echo '</div>';
+            
+                                echo '<div class="col-md-6 diagram bg-transparent mb-3">';
+                                    echo '<h2 class="row justify-content-center" style="color: #8F7CEC;">Diagram wydatków</h2>';
+                                    echo '<div class="piechart m-3">';
+                                        echo '<canvas id="myChartEx"></canvas>';
+                                    echo '</div>';
+                                echo '</div>';
+                        }
+                                else if ($rowNumberExpenses == 0)
+                                {
+                                    echo '<div class="container">';                    
+                                        echo '<div class="text-light mt-2 mb-2">';
+                                            echo '<h2 class="row justify-content-center">Brak zapisanych wydatków w przedziale czasu od '.$startDate.' do '.$endDate.'</h2>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            }                
+                        }
+                        catch(Exception $e)
+                            {
+                                echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności!</span>';
+                                echo '<br />Informacja developerska: '.$e;
+                            }
+
+                ?>
+            
+            <?php
+                if (!$rowNumberIncomes == 0 && !$rowNumberExpenses == 0)
+                {
+                    echo '<div class="text-light mt-4">';        
+                                if ($incomesSum >= $expensesSum){
+                                    echo '<p class="row justify-content-center align-items-start">Gratulacje. Świetnie zarządzasz finansami!</p>';
+                                } else
+                                {
+                                    echo '<p class="row justify-content-center align-items-start">Uważaj, wpadasz w długi!</p>';
+                                }  
+                        echo '<p class="row justify-content-center align-items-start" >Suma przychodów: <span class="row justify-content-center">'.$incomesSum.' zł</span></p>';
+                        echo '<p class="row justify-content-center align-items-start">Suma wydatków: <span class="row justify-content-center">'.$expensesSum.' zł</span></p>';                         
+                    echo '</div>';
+
+                }
+                    unset($incomesSum);
+                    unset($startDate);
+                    unset($endDate);                
+                    unset($expensesSum);
+            
+                    $resultIncomes -> free_result(); 
+                    $resultIncomesChart -> free_result(); 
+                    $resultExpenses -> free_result(); 
+                    $resultExpensesChart -> free_result();
+                    $connection->close();
+            
+                }
+            ?>
+                        </div>
+                    </div>
+                </section>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            
+            <script>
+            const nameArrayIn = <?php echo json_encode($nameArrayIncomes); ?>;
+            const sumArrayIn = <?php echo json_encode($sumArrayIncomes); ?>;
+            
+            const dataIn = {
+            labels: nameArrayIn,
+            datasets: [{
+                label: 'Diagram przychodów',
+                data: sumArrayIn,
+                backgroundColor: 
+                [
+                    'rgb(67, 227, 18)',
+                    'rgb(219, 96, 20)',
+                    'rgb(59, 217, 235)',
+                    'rgb(217, 50, 206)' 
+                ],
+                hoverOffset: 0
+            }]
+            };
+            
+            const configIn = {
+                type: 'pie',
+                data: dataIn,
+            };
+            
+            const myChartIn = new Chart(
+                document.getElementById('myChartIn'),
+                configIn
+            );
+            
+            </script>
+            
+            <script>
+            const nameArrayEx = <?php echo json_encode($nameArrayExpenses); ?>;
+            const sumArrayEx = <?php echo json_encode($sumArrayExpenses); ?>;
+            
+            const dataEx = {
+            labels: nameArrayEx,
+            datasets: [{
+                label: 'Diagram wydatków',
+                data: sumArrayEx,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)',
+                    'rgb(154, 205, 50)',
+                    'rgb(107, 142, 35)',
+                    'rgb(47 79 79)',
+                    'rgb(	112 128 144)',
+                    'rgb(192 192 192)',
+                    'rgb(165 42 42)',
+                    'rgb(160 82 45)',
+                    'rgb(65 105 225)',
+                    'rgb(100 149 237)'
+                ],
+                hoverOffset: 0
+            }]
+            };
+            
+            const configEx = {
+                type: 'pie',
+                data: dataEx,
+            };
+            
+            const myChartEx = new Chart(
+                document.getElementById('myChartEx'),
+                configEx
+            );
+            </script>
+
         </div>
 
         <div class="row justify-content-center align-items-center">
 
             <div class="col-12 col-md-6 button" id="register">
-                <a href="mainMenu.html">Anuluj</a>
-            </div>
+            <a href="mainMenu.php">Anuluj</a>
 
         </div>
 
+
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
 
 </body>
 
