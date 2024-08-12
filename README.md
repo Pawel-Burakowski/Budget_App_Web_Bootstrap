@@ -35,5 +35,6 @@ https://budget.pawel-burakowski.profesjonalnyprogramista.pl/
 ![Project logo](images/background5.jpg)
 ![Project logo](images/background6.jpg)
 ![Project logo](images/background7.jpg)
+![Project logo](images/background8.jpg)
 
 <br/>
