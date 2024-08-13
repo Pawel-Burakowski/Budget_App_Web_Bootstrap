@@ -8,7 +8,7 @@
 
 ## :scroll: Project description
 
-Responsive household budgeting application written using PHP and BOOTSTRAP.
+Responsive household budgeting application written using PHP, SQL and BOOTSTRAP.
 The programme initially asks the user to log in or create an account.
 The form validator is responsible for the correctness of the login and registration.
 Once the account has been created/logged in correctly, the user is taken to the main menu of the programme. 
@@ -26,6 +26,7 @@ https://budget.pawel-burakowski.profesjonalnyprogramista.pl/
 - SQL
 - HTML
 - CSS
+- Bootstrap
 
 <br/>
 
