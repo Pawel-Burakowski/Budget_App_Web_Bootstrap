@@ -15,7 +15,7 @@ Once the account has been created/logged in correctly, the user is taken to the 
 The main menu has 4 options to choose from: "add income", "add expense", "view balance sheet", "settings" and a "logout" button.
 The first option "add income" allows the user to add the amount of income, the date of that income, its category and an optional comment.
 The second option 'add expense' allows the user to add the amount of the expense, the date of this income, the method of payment, the category and an optional comment. 
-The "view balance sheet" option provides us with a summary of our expenditure and income in the form of a diagram. We can also easily select the period of interest, e.g. the previous month or the current year. 
+The "view balance sheet" option provides us with a summary of our expenditure and income in the form of a diagram. We can also easily select the period of interest, e.g. the previous month or the current year. The data is stored on the database server that creates the SLQ 'personalbudget' script. The script inserts sample data into tables, such as expenditure and income categories, payment methods and user information.
 
 
 https://budget.pawel-burakowski.profesjonalnyprogramista.pl/
@@ -23,6 +23,7 @@ https://budget.pawel-burakowski.profesjonalnyprogramista.pl/
 ## :hammer_and_pick: Built With
 
 - PHP
+- SQL
 - HTML
 - CSS
 
